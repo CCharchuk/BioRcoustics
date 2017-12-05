@@ -3,6 +3,6 @@
 #Learning how to write functions and loops.
 library(RCurl)
 
-url <- "https://raw.githubusercontent.com/CCharchuk/BioRcoustics/master/Count_All_Birds_Each_Station_Crosstab.csv"
+url <- "https://raw.githubusercontent.com/CCharchuk/BioRcoustics/master/sitesppdata.csv"
 sitespp <- getURL(url)
 sitespp <- read.csv(textConnection(sitespp))
