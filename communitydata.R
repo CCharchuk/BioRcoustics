@@ -14,4 +14,7 @@ surveyyear <- sitespp$Year
 #Things work faster as a matrix 
 sitespp <- as.matrix(sitespp[,5:57])
 spp <- colnames(sitespp)
-
+#simple anova testing for richenss differences between stations (treatments)
+rawrich <- lm(richness~stations)
+rawrichcoef <- coef(rawrich)
+save(rawrichcoef, file="rawrichcoef.rda")
