@@ -2,8 +2,8 @@ library(seewave)
 library(tuneR)
 setwd("C:/Users/Richard Hedley/Desktop")
   
-  ##############  
-#Object types
+#Having fun in R----  
+#Object types----
 
 #Vector
 
@@ -22,9 +22,10 @@ g^2
 x=g*g
 x <- g*g
 
-#Dot product
+#Dot product----
 g%*%g
 
+#Naming elements----
 #You can name the elements of vectors.
 names(g) = c('Frank', 'Cindy', 'Brian', 'Georgia', 'Beelzebub')
 names(g) = c('Frank', 'Cindy', 'Brian', 'Georgia', 'Beelzebub')
@@ -32,6 +33,7 @@ names(g) = c('Frank', 'Cindy', 'Brian', 'Georgia', 'Beelzebub')
 #That allows you to access data using these names.
 g['Beelzebub']
 
+#Dataframes----
 #Data Frame stores a set of vectors (vertically)
 
 h=data.frame(ID=c(1:10), Value=c(21:30))
@@ -44,8 +46,11 @@ h=data.frame(ID=c(1:10), Value=c(21:30))
 
 h$ID
 
-#another way using column name
+#another way using column name [row,column]
 h[,'ID']
+h[,c('ID','Value')]
+h[c(1,4),] 
+c('ID','Value')
 
 #By column number
 
@@ -57,13 +62,12 @@ h[,1]
 row.names(h)=letters[1:10]
 
 #By row name?
-h$a #Doesn't work
+h$a #Doesn't work - can't use $ with rows, returns NULL
 h['a',] #Works!
 h[1,] #Works!
 
 
-#######
-#Matrices
+#Matrices----
 
 #Notice this function has multiple arguments.
 M=matrix(c(1,2,3,4,5,6,7,8,9), nrow=3)
@@ -74,6 +78,7 @@ M
 
 #notice there are several arguments
 N=matrix(c(1:9), nrow=3, byrow=T)
+N=matrix(0, nrow=3, ncol=3)
 N==M
 
 #Can name matrix rows and columns too.
@@ -86,7 +91,7 @@ M$d #Doesn't work.
 M[,'d'] #Works
 M[,1] #Works
 
-#What's the difference between a matrix and a data frame?
+#What's the difference between a matrix and a data frame? Matrices - elements must be same type, numbers  ; Dataframes - multiple forms
 
 
 #Subsetting by values
@@ -100,16 +105,16 @@ N[N>3] #Same as 2 rows above.
 #This means "tell me the values of N are greater than 2, less than or equal
 #to 8, and are odd.
 N[N>2 & N<=8 & N%%2==1]
+#N%%2==1  when you divide every value by 2, you get 1 left over
 
 #This means "tell me the values of N that are less than 3 or greater than 5
 N[N<3 | N>5] 
 
 
-#####
-#Lists
+#Lists----
 
 #List is a set of, well, anything you want. Can be a set of vectors, set of dataframes, etc.
-
+y=2
 MyList <- list(M, N, x, y)
 
 #Subsetting lists
@@ -123,7 +128,10 @@ MyList[[1]] #So does this. Usually you want to do this.
 #Multi-level subsetting of lists
 
 MyList[[1]][1,3]
+object=MyList[[1]]
+object[1,3]
 
+#Processing time----
 #Example of how this can save lots of time.
 #Say I want to measure the length of a sound. Read in the sound file,
 #then calculate the number of samples, then divide by the sample rate. 3 steps.
@@ -154,14 +162,14 @@ Set=c(1,5,12,14,18,20,4,3,2)
 #for each proportion, multiply that proportion by the natural logarithm.
 #Sum them
 #Take the negative value.
+Prop = (Set/sum(Set))
+-sum(log(Prop)*Prop)
 
 
 
 
 
-
-
-#Data types
+#Data types----
 
 #Data comes in many different types.
 Species=c('BCCH', 'CAVI', 'HOWR')
@@ -180,7 +188,7 @@ class(Species)
 
 
 Species=data(tico)
-class(Species)
+class(Species)  #classifies as Wave
 
 #Data type determines what you can do with the data.
 
@@ -188,7 +196,7 @@ Species=c(1:3)
 sum(Species)
 
 Species=c('BCCH', 'CAVI', 'HOWR')
-sum(Species)
+sum(Species) # can't do this!
 is.numeric(Species)
 is.character(Species)
 
