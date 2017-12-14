@@ -14,11 +14,23 @@ g
 
 #Multiplying vectors by vectors
 
+sum(g)
+
 #Elementwise:
 g*g
+g^2
+x=g*g
+x <- g*g
 
 #Dot product
 g%*%g
+
+#You can name the elements of vectors.
+names(g) = c('Frank', 'Cindy', 'Brian', 'Georgia', 'Beelzebub')
+names(g) = c('Frank', 'Cindy', 'Brian', 'Georgia', 'Beelzebub')
+
+#That allows you to access data using these names.
+g['Beelzebub']
 
 #Data Frame stores a set of vectors (vertically)
 
@@ -177,6 +189,8 @@ sum(Species)
 
 Species=c('BCCH', 'CAVI', 'HOWR')
 sum(Species)
+is.numeric(Species)
+is.character(Species)
 
 #errors are FREQUENTLY a result of this.
 
