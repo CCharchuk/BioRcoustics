@@ -1,4 +1,4 @@
-#functions
+#Functions----
 setwd("~/Documents/BioRcoustics")
 
 #Load the datasets package.
@@ -59,7 +59,7 @@ Convert.to.Julian(9,12)  #This gives you the julian date of Sep 12.
 #This is the same as 
 Convert.to.Julian(month=9, day=12)
 Convert.to.Julian(month=data$Month[135], day=data$Day[135])
-#Always check to make sure your function works.
+#Always check to make sure your function works.----
 
 #So the basic structure of a function is:
 
@@ -85,7 +85,7 @@ Convert.to.Julian(month=data$Month[5], day=data$Day[5])
 #This is where the power of coding becomes evident.
 
 
-#Loops
+#Loops----
 #We'll do this two ways: with a for loop and with the apply function.
 
 #for loop
@@ -178,7 +178,7 @@ while(x > 0 & x < 1) {
 plot(sequence, type='l')
 
 
-#One more example from my PhD work.
+#One more example from my PhD work.----
 
 sharing=read.csv('SongSharing.csv', header=T, row.names=1)
 
