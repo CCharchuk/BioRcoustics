@@ -1,5 +1,5 @@
 #functions
-setwd("D:/School stuff/BioRcoustics")
+setwd("~/Documents/BioRcoustics")
 
 #Load the datasets package.
 #If you don't have it, you will need to install it.
@@ -13,6 +13,12 @@ data=airquality
 
 #Always good to plot the data.
 plot(data$Month, data$Ozone)
+
+#simple function
+mathfun <- function(a,b,c) {
+  a*b*c + (a*b) + (a^c)
+}
+mathfun(2,3,4) #equals 2*3*4 + (2*3) + (2^4)
 
 #We see that ozone looks higher in month 7 and 8. However, we are ignoring
 #the day within each month. It'd be ideal to have that! But it's given as 
@@ -93,9 +99,9 @@ rows=nrow(data)
 #It's often necessary to initiate the output vector. We can do that here:
 Dates=c()
 #Now Dates is a vector of length 0 (i.e. empty)
-
-for(i in 1:rows) { #Again with the curly brackets to define the start and 
-  #end of the loop.
+#We are going to iteratively add to this vector
+  for(i in 1:rows) { #Again with the curly brackets to define the start and 
+  #end of the loop. Fills in i with 1:153 iteratively (doesn't have to be i, just has to be consistent)
   M=data$Month[i]  #Extract the month data for data point i
   D=data$Day[i]    #Extract the day data for data point i
   J=Convert.to.Julian(M,D) #convert M and D to a julian date.
@@ -123,7 +129,7 @@ plot(data$Julian, data$Ozone)
 #So what happens if (realistically, when) your loop doesn't run.
 
 #Let's say you write the following loop:
-
+Dates=c()
 for(i in 1:rows) { #Again with the curly brackets to define the start and 
   #end of the loop.
   M=data$Month[i]  #Extract the month data for data point i
@@ -141,7 +147,8 @@ for(i in 1:rows) { #Again with the curly brackets to define the start and
 
 #This is also how I make loops in the first place.
 #Start with i=1
-i=1
+Dates=c()
+i=2
 M=data$Month[i]  #Extract the month data for data point i
 D=data$Day[i]    #Extract the day data for data point i
 J=Convert.to.Julian(M,D) #convert M and D to a julian date.
@@ -155,7 +162,7 @@ Dates=c(Dates,J)
 #There are several apply functions: apply, sapply, lapply, mapply.
 #I won't go into them, but in general, they are faster than for loops.
 ?mapply
-mapply(Convert.to.Julian, data[,5], day=data[,6])
+mapply(Convert.to.Julian, data$Month, data$Day)
 
 #There is also >1 type of loop. 
 #while loops are good if you want to run UNTIL some condition is met.
@@ -200,7 +207,6 @@ comparison=matrix(NA, ncol=19, nrow=19, dimnames=list(c(colnames(sharing)), c(co
 
 #How to fill it? Note that we need to fill the matrix along two dimensions.
 #rows and columns. So we need TWO for loops!
-
 for(i in 1:nrow(comparison)) {
   for(j in 1:ncol(comparison)) {
     if(i<=j) { #values below the diagonal are equal to values above, so no
