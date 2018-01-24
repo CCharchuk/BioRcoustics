@@ -1,4 +1,5 @@
-setwd("D:/School stuff/BioRcoustics")
+setwd("~/Documents/BioRcoustics")
+install.packages("tuneR")
 library(tuneR)
 
 
@@ -11,6 +12,7 @@ library(tuneR)
 x=proc.time()
 sound=readWave('Sound1.wav')
 proc.time()-x
+
 
 #You'll notice that took some time, since it's a 10 minute file.
 #On my computer it took 2.29 seconds.
@@ -71,7 +73,7 @@ Fs=sound@samp.rate #Get the sample rate.
 Samples=length(sound@left) #get the number of samples
 Length=Samples/Fs #calculate recording length.
 #Now make a power spectrum for the duration of the recording.
-
+?powspec
 power=powspec(sound@left, sr=Fs, wintime=Length) 
 
 #Now plot it.
@@ -80,7 +82,7 @@ plot(power, type='l')
 #WTF. There is a huge amount of power at the low frequencies
 #What could cause that?
 #DC offset is one possibility. Plot samples to check
-plot(sound@left, type='l')
+plot(sound@right, type='l')
 #Notice how the samples are NOT centered at 0? 
 #That's DC offset. Let's remove it.
 sound@left=sound@left-mean(sound@left)
@@ -90,12 +92,13 @@ plot(sound@left, type='l') #better.
 power=powspec(sound@left, sr=Fs, wintime=Length)
 plot(power, type='l') #Better, but there's still a lot of low
 #frequency noise. Let's just change the y limits.
-power=powspec(sound@left, sr=Fs, wintime=Length, steptime=Length)
+power=powspec(sound@right, sr=Fs, wintime=Length, steptime=Length)
 plot(power, type='l', ylim=c(0, 1e11)) 
 
 #Question: what does the x axis represent?
 
 #Took me some time to figure it out:
+
 winpts=Length*Fs
 nfft=2^(ceiling(log(winpts)/log(2))) 
 sequence=0:(nfft/2-1)
